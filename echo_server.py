@@ -7,7 +7,7 @@ PORT = 8080
 
 def handle_connection(conn, addr):
      with conn:
-        print(f"Connected by {addr}")
+        print(f"Connected by {addr}, {conn = }")
         while True:
             '''
             recv(bytes) 
@@ -32,7 +32,7 @@ def start_server():
         setsockopt(level, option, value)
         https://manpages.debian.org/bullseye/manpages-dev/setsockopt.2.en.html
         '''
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
         s.listen()
         conn, addr = s.accept()
         handle_connection(conn, addr)
@@ -53,5 +53,5 @@ def start_threaded_server():
             thread = Thread(target=handle_connection, args=(conn, addr))
             thread.run()
 
-start_server()
-#start_threaded_server()
+# start_server()
+start_threaded_server()

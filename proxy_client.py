@@ -1,4 +1,8 @@
 import socket
+"""
+echo_client.py can also be used to connect to the proxy server
+to type requests manually. 
+"""
 
 BYTES_TO_READ = 4096
 
@@ -9,8 +13,6 @@ def get(host, port):
         s.send(request)
         # Shut the socket to further writes
         s.shutdown(socket.SHUT_WR)
-        
-        print("Waiting for response!")
         chunk = s.recv(BYTES_TO_READ)
         result = b'' + chunk
         
